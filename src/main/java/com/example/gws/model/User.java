@@ -17,6 +17,7 @@ public class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
+    @Column(nullable = false, unique = true)
     @Size(min=2, message = "Не меньше 5 знаков")
     private String username;
     @Size(min=2, message = "Не меньше 5 знаков")

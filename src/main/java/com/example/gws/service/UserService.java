@@ -19,8 +19,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-        //implements UserDetailsService {
-  /*  @PersistenceContext
+    //implements UserDetailsService {
+    @PersistenceContext
     private EntityManager em;
     @Autowired
     UserRepository userRepository;
@@ -29,7 +29,20 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
+
+    public boolean saveUser(User user) {
+        User userFromDB = userRepository.findByUsername(user.getUsername());
+        if (userFromDB != null) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+}
+
+
+
+  /*  @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
 
@@ -49,12 +62,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
 
-        if (userFromDB != null) {
-            return false;
-        }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -74,4 +82,3 @@ public class UserService {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
     }*/
-}

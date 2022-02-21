@@ -1,29 +1,25 @@
 package com.example.gws.controller;
 
 import com.example.gws.model.User;
+import com.example.gws.repository.UserRepository;
 import com.example.gws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
-@RestController
+@Controller
 public class RegistrationController {
-
-   /*@Autowired
+   @Autowired
    UserService userService;
+   @Autowired
+    UserRepository userRepository;
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-        return "registration";
-    }
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
@@ -39,6 +35,18 @@ public class RegistrationController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-        return "redirect:/";
-    }*/
+        else{userRepository.save(userForm);
+            return "redirect:/login";}
+
+    }
+
+
+
+  /*  @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "registration";
+    }
+
+   */
 }

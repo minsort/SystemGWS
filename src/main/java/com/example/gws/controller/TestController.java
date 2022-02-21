@@ -12,8 +12,6 @@ public class TestController {
     public String index() {
         return "r";
     }
-
-
     @GetMapping("/a")
     public String index2() {
         return "forAdmin";
